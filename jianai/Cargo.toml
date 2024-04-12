@@ -1,0 +1,17 @@
+[package]
+name = "jianai"
+version = "2014.4.11"
+edition = "2021"
+
+
+[dependencies]
+rocket = { version = "*" }
+anyhow = { version = "*" }
+clap = { version = "*", features = ["derive", "env"] }
+tokio = { version = "*", features = ["full"] }
+tracing = { version = "*" }
+tracing-subscriber = { version = "*", features = ["env-filter"] }
+serde_json = { version = "*" }
+sqlx = { version = "*", features = ["runtime-tokio", "tls-rustls", "postgres"] }
+redis = { version = "*" }
+redis_pool = { version = "*" }
