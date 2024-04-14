@@ -6,12 +6,23 @@ edition = "2021"
 
 [dependencies]
 rocket = { version = "*" }
+derivative = { version = "*" }
 anyhow = { version = "*" }
 clap = { version = "*", features = ["derive", "env"] }
 tokio = { version = "*", features = ["full"] }
 tracing = { version = "*" }
 tracing-subscriber = { version = "*", features = ["env-filter"] }
+byteorder = { version = "*" }
+serde = { version = "*", features = ["derive"] }
 serde_json = { version = "*" }
-sqlx = { version = "*", features = ["runtime-tokio", "tls-rustls", "postgres"] }
-redis = { version = "*" }
+percent-encoding = { version = "*" }
+gethostname = { version = "*" }
+sha3 = { version = "*" }
+redis = { version = "*", features = ["tokio-comp", "aio", "cluster-async"] }
 redis_pool = { version = "*" }
+diesel = { version = "*", features = [
+    "postgres",
+    "postgres_backend",
+    "serde_json",
+] }
+diesel-async = { version = "*", features = ["bb8", "postgres"] }
