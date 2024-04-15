@@ -26,3 +26,13 @@ diesel = { version = "*", features = [
     "serde_json",
 ] }
 diesel-async = { version = "*", features = ["bb8", "postgres"] }
+async-recursion = { version = "*" }
+### segment
+ort = { git = "https://github.com/pykeio/ort.git", tag = "v2.0.0-rc.1", default-features = false, features = [
+    "load-dynamic",
+    "ndarray",
+] }
+image = { version = "*" }
+ndarray = { version = "*" }
+ordered-float = { version = "*" }
+### segment

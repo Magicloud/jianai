@@ -1,4 +1,4 @@
-use crate::app_state::AppState;
+use crate::app_state::StoreState;
 use crate::schema::*;
 use diesel::ExpressionMethods;
 use diesel_async::RunQueryDsl;
@@ -29,7 +29,7 @@ struct UploadMetaResponse {
 
 #[instrument]
 #[post("/upload_meta", format = "application/json", data = "<meta>")]
-pub async fn upload_meta(state: &State<AppState>, meta: String) -> UploadMetaResponse {
+pub async fn upload_meta(state: &State<StoreState>, meta: String) -> UploadMetaResponse {
     let upload_id = state.get_id();
     let result: anyhow::Result<()> = try {
         let mut redis = state.redis_pool.aquire().await?;
@@ -56,7 +56,7 @@ pub async fn upload_meta(state: &State<AppState>, meta: String) -> UploadMetaRes
 #[instrument]
 #[post("/upload_image?<upload_id>", format = "plain", data = "<file>")]
 pub async fn upload_image(
-    state: &State<AppState>,
+    state: &State<StoreState>,
     upload_id: String,
     mut file: TempFile<'_>,
 ) -> (Status, String) {

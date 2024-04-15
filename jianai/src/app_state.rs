@@ -9,7 +9,7 @@ use std::{
 
 #[derive(Derivative)]
 #[derivative(Debug)]
-pub struct AppState {
+pub struct StoreState {
     #[derivative(Debug = "ignore")]
     pub redis_pool: RedisPool<Client, MultiplexedConnection>,
     pub pg_pool: Pool<AsyncPgConnection>,
@@ -18,7 +18,7 @@ pub struct AppState {
     pub upload_image_http_path: String,
     pub image_folder: PathBuf,
 }
-impl AppState {
+impl StoreState {
     pub fn get_id(&self) -> String {
         format!(
             "{}{}",

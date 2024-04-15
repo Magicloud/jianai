@@ -51,4 +51,8 @@ pub enum SubCmd {
         #[arg(short, long, default_value = "/upload_image")]
         upload_image_http_path: String,
     },
+    Segment {
+        #[arg(short = 'p', long)]
+        model_path: PathBuf,
+    },
 }

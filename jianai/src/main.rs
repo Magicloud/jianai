@@ -4,6 +4,7 @@ mod cli;
 mod handlers;
 mod model;
 mod schema;
+mod segmenting;
 mod types;
 
 use anyhow::{anyhow, Result};
@@ -47,7 +48,7 @@ async fn main() -> Result<()> {
         cli::SubCmd::Store {
             upload_image_http_path,
         } => {
-            let state = app_state::AppState {
+            let state = app_state::StoreState {
                 redis_pool,
                 pg_pool,
                 id_prefix: format!(
@@ -67,9 +68,11 @@ async fn main() -> Result<()> {
                 .manage(state);
             web.launch().await?;
         }
+        cli::SubCmd::Segment { model_path } => {
+            tokio::spawn(web.launch());
+            segmenting::segmenting_loop(redis_pool, pg_pool, args.image_folder, model_path).await?;
+        }
     }
 
-    // let web = tokio::spawn(
-    // web.await??;
     Ok(())
 }
